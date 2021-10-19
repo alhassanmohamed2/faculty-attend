@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Admin{% endblock %} {% block nav %}Admin Panel{% endblock %} {% block navelement %}
+
+
+<a class="navbar-brand" href="/logout">LogOut</a> {% endblock %} {% block content %}
+
+
+<div style="text-align:center; margin-bottom:30px;">
+    <table class="table">
+
+        <tbody>
+
+            <tr>
+                <td><button type="button" class="btn btn-success modify">Add Student</button></td>
+
+            </tr>
+            <tr>
+                <td><button class="btn btn-warning attend">Start Take Attend</button></td>
+
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-info search">Search in Database</button></td>
+
+            </tr>
+
+
+        </tbody>
+    </table>
+
+</div>
+
+<div class="admin-action"></div>
+<div class="search"></div>
+<script src="{{url_for('static',filename='js/admin-buttons.js')}}"></script>
+
+{% endblock %}

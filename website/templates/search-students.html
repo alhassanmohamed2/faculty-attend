@@ -1,0 +1,22 @@
+<form method="POST">
+    <div class="mb-3">
+        <input type="text" class="form-control student_name" id="exampleFormControlInput1" placeholder="Student Name" name="s-name" required>
+    </div>
+    <div class="mb-3">
+        <select class=" form-select departement" aria-label="Default select example " name="departement">
+        {% for departement in departements %}
+        <option value="{{departement}}">{{departement}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="mb-3">
+        <select class=" form-select subject" aria-label="Default select example" name="subject">
+        {% for subject in admin_subjects %}
+        <option value="{{subject}}">{{subject}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary mb-3 search_show" name="search">Search</button>
+    </div>
+</form>

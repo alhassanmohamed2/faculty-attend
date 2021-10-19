@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static',filename='images/favicon.ico')}}" type="image/x-icon">
+    <script src="{{url_for('static',filename='js/jquery-3.6.0.min.js')}}"></script>
+
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+
+
+        <a class="navbar-brand" style="margin:10px;">{% block nav %}Home{% endblock %}</a> {% block navelement %}{% endblock %}
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        {{ message }}
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <br /><br /><br />
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+<script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+
+
+<script type="text/javascript">
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+
+</html>

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Admin{% endblock %} {% block nav %}Admin{% endblock %} {% block content %}
+
+<form method="POST" style="margin:20px;padding:10px">
+    <div class="mb-3">
+
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="admin-name">
+    </div>
+    <div class="mb-3">
+
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Password " name="admin-password">
+    </div>
+
+    <div class="mb-3 ">
+        <button type="submit " class="btn btn-primary mb-3 " name="registere ">Login</button>
+    </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Attend{% endblock %} {% block nav %}Attend{% endblock %} {% block content %}
+
+<form method="POST">
+    <div class="mb-3">
+
+        <select class=" form-select " aria-label="Default select example " name="name">
+            {% for name in students_names %}
+            <option value="{{name.name}}">{{name.name}}</option>
+            {%endfor%}
+          </select>
+    </div>
+    <div class="mb-3">
+        <select class=" form-select " aria-label="Default select example " name="departement">
+        {% for departement in departements %}
+        <option value="{{departement}}">{{departement}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary mb-3" name="registere">Registere</button>
+    </div>
+</form>
+{% endblock %}

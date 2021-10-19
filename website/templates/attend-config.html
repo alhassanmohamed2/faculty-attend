@@ -1,0 +1,23 @@
+<form method="POST">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Wifi password" name="wifi">
+    </div>
+    <div class="mb-3">
+        <select class=" form-select " aria-label="Default select example " name="subject">
+        {% for subject in admin_subjects  %}
+        <option value="{{subject}} ">{{subject}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary mb-3" name="attend-config">Save</button>
+    </div>
+
+</form>
+
+<button type="button" class="btn btn-info start">Start Attend</button>
+
+
+<button type="button" class="btn btn-info stop">Stop Attend</button>
+
+<script src="{{url_for('static',filename='js/attend.js')}}"></script>
