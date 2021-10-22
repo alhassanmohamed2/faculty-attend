@@ -23,7 +23,8 @@ departement_info_file = path.join(getcwd(),'website','data','departement.txt')
 shared_info = {
 "selected_subject":"",
 "close_attend":True,
-"wifipassword":""
+"wifipassword":"",
+"student_departement":""
 }
 
 admin_subjects = openfile(subjects_info_file)

@@ -1,22 +1,33 @@
 <form method="POST">
     <div class="mb-3">
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Student Name" name="s-name">
+        <input type="text" class="form-control s-name" id="exampleFormControlInput1" placeholder="Student Name" name="s-name" required>
     </div>
     <div class="mb-3">
-        <select class=" form-select " aria-label="Default select example " name="departement">
+        <select class=" form-select departement" aria-label="Default select example " name="departement" required>
         {% for departement in departements %}
-        <option value="{{departement}} ">{{departement}}</option>
+        <option value="{{departement}}">{{departement}}</option>
         {%endfor%}
       </select>
     </div>
     <div class="mb-3">
-        <select class=" form-select " aria-label="Default select example " name="subject">
+        <select class=" form-select subject" aria-label="Default select example " name="subject" required>
         {% for subject in admin_subjects  %}
-        <option value="{{subject}} ">{{subject}}</option>
+        <option value="{{subject}}">{{subject}}</option>
         {%endfor%}
       </select>
     </div>
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary mb-3" name="modify">ADD</button>
+        <select class=" form-select database" aria-label="Default select example " name="database" required>
+    
+        <option value="names">NAMES Database</option>
+        <option value="attend">Attend Database</option>
+       
+      </select>
+    </div>
+    <div class="mb-3">
+        <input type="date" class="form-control date" name="date" style="display: none;">
+    </div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary mb-3 modify-action" name="modify">ADD</button>
     </div>
 </form>

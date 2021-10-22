@@ -1,0 +1,25 @@
+ {% extends "base.html" %} {% block title %}Online{% endblock %} {% block nav %}Online{% endblock %}{% block navelement %}
+<a class="navbar-brand" href="/admin-panel" target="_blank">Open Admin Panel</a> {% endblock %} {% block content %}
+<tr>
+    <td><button type="button" class="btn btn-info online">Online Students</button></td>
+
+</tr>
+<div class="search"></div>
+<script>
+    $(document).on('click', 'button.online', function() {
+        setInterval(function() {
+            students_update();
+        }, 2000)
+
+        function students_update() {
+            $.ajax({
+                url: "/retrive-students",
+                method: "POST",
+                success: function(data) {
+                    $("div.search").html(data)
+                }
+            })
+        }
+    })
+</script>
+{% endblock %}

@@ -2,16 +2,26 @@
     <thead>
         <tr>
             <th scope="col">Name</th>
+            {% if database == 'attend'%}
             <th scope="col">Days Attend</th>
+            {%endif%}
         </tr>
     </thead>
     <tbody>
-
+        {% if student_name != ''%}
         <tr>
             <td>{{student_name}}</td>
+            {% if database == 'attend'%}
             <td>{{days_attend}}</td>
+            {%endif%}
         </tr>
-
+        {%else%} {%for student in student_search_info%}
+        <tr>
+            <td>{{student.name}}</td>
+            {% if database == 'attend'%}
+            <td>{{student[1]}}</td>
+            {%endif%}
+        </tr> {%endfor%} {%endif%}
 
     </tbody>
 </table>

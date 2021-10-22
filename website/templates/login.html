@@ -10,7 +10,7 @@
           </select>
     </div>
     <div class="mb-3">
-        <select class=" form-select " aria-label="Default select example " name="departement">
+        <select class=" form-select departement" aria-label="Default select example " name="departement">
         {% for departement in departements %}
         <option value="{{departement}}">{{departement}}</option>
         {%endfor%}
@@ -18,6 +18,9 @@
     </div>
     <div class="mb-3">
         <button type="submit" class="btn btn-primary mb-3" name="registere">Registere</button>
+        <button type="submit" class="btn btn-primary mb-3 select_dep" name="select_dep">Show Names After Select Departement</button>
     </div>
+
 </form>
+
 {% endblock %}

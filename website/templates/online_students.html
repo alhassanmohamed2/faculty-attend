@@ -1,0 +1,21 @@
+<h1>Number Of Students online once: {{num_students_c}}</h1>
+<h1>
+    Number Of Students attend: {{num_students_r}}
+</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Departement</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for student in update_students%}
+        <tr>
+            <td>{{student.name}}</td>
+            <td>{{student.departement}}</td>
+        </tr>
+
+        {%endfor%}
+    </tbody>
+</table>

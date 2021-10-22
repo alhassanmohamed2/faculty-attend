@@ -12,37 +12,45 @@ def close_attend():
 
 @auth.route('/start-attend')
 def start_attend():
+    if shared_info["selected_subject"] == "":
+        return '<script>alert("select the subject from the configuration first")</script>' 
     shared_info['close_attend'] = False
-    return 'Opened'
+    return f'<script>alert(\'Selected Subject is: {shared_info["selected_subject"]}\')</script>'
 
 
 
 @auth.route('/login',methods=['POST','GET'])
 def login():
     ip_address = request.remote_addr
+    departements = openfile(departement_info_file)
     if ip_address == IP:
         pass
     elif (ip_address in students_IPs) or shared_info['close_attend'] :
         abort(403)
-    students_names = NAMES.query.filter_by(subject=shared_info["selected_subject"]).all()
     if request.method == 'POST':
-        name = str(request.form.get('name')).strip()
-        departement = str(request.form.get('departement')).strip()
-        student = Student.query.filter_by(name=name,date=current_time,subject=shared_info["selected_subject"]).first()
-        if student:
-            flash("This User is alerdy there",category='error')
-        elif name == '' or departement == '':
-             flash("Type Your Information",category='error')
-        else:
-            attend_student = Student(name=name, departement=departement, subject=shared_info["selected_subject"])
-            db.session.add(attend_student)
-            db.session.commit()
-            flash("Success", category='success')
-            students_IPs.add(ip_address)
-            return redirect(url_for('views.home'))
-    departements = openfile(departement_info_file)
-    return render_template('login.html',departements=departements,students_names=students_names)
-
+        if request.form.get('registere') != None:
+            if request.form.get('name') == None:
+                flash("Select Departement To Show the Names",category='error')
+                return redirect(url_for('auth.login'))
+            name = str(request.form.get('name')).strip()
+            departement = str(request.form.get('departement')).strip()
+            student = Student.query.filter_by(name=name,date=current_time,subject=shared_info["selected_subject"]).first()
+            if student:
+                flash("This User is alerdy there",category='error')
+            elif name == '' or departement == '':
+                flash("Type Your Information",category='error')
+            else:
+                attend_student = Student(name=name, departement=departement, subject=shared_info["selected_subject"])
+                db.session.add(attend_student)
+                db.session.commit()
+                flash("Success", category='success')
+                students_IPs.add(ip_address)
+                return redirect(url_for('views.home'))
+        elif request.form.get('select_dep') != None:
+            departement = str(request.form.get('departement')).strip()
+            students_info = NAMES.query.filter_by(subject=shared_info["selected_subject"],departement=departement).all()
+            return render_template('login.html',departements=departements,students_names=students_info)
+    return render_template('login.html',departements=departements)
 
 
 @auth.route('/admin-login',methods=['POST','GET'])

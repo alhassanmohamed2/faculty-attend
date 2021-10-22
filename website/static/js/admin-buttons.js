@@ -33,19 +33,45 @@ $(document).on('click', 'button.search_show', function() {
     name_student = $(".student_name").val()
     subject = $(".subject").val().replace('\n', "")
     dep = $(".departement").val().replace('\n', "")
+    database = $(".database").val().replace('\n', "")
     $.ajax({
         url: "/show_search_students",
         method: "POST",
         data: {
             name: name_student,
             subject: subject,
-            dep: dep
+            dep: dep,
+            database: database
         },
         success: function(data) {
             $("div.search").html(data)
         }
     })
 })
+
+
+$(document).on('click', 'button.modify-action', function() {
+    name_student = $(".s-name").val()
+    subject = $(".subject").val().replace('\n', "")
+    dep = $(".departement").val().replace('\n', "")
+    database = $(".database").val().replace('\n', "")
+    date = $(".date").val()
+    $.ajax({
+        url: "/modify-students-action",
+        method: "POST",
+        data: {
+            name: name_student,
+            subject: subject,
+            dep: dep,
+            database: database,
+            date: date
+        },
+        success: function(data) {
+            $("div.search").html(data)
+        }
+    })
+})
+
 
 $(document).on('click', 'button.stop', function() {
     $.ajax({
@@ -62,7 +88,19 @@ $(document).on('click', 'button.start', function() {
         url: "/start-attend",
         method: "GET",
         success: function(data) {
-
+            $("div.search").html(data)
         }
     })
+})
+
+
+
+$(document).on('change', 'select.database', function() {
+    database = $(this).val().replace('\n', "")
+    if (database == 'attend') {
+        $('.date').css("display", "block")
+    }
+    if (database == 'names') {
+        $('.date').css("display", "none")
+    }
 })
