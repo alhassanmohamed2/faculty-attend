@@ -1,14 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-
-
-from os import path
+from os import path, getcwd
 from datetime import timedelta
 db = SQLAlchemy()
 
-MAIN_DB_NAME = "./data/attend.db"
-STUDENTS_DATABASE_NAME = './data/student_names.db'
+MAIN_DB_NAME = "attend.db" 
+STUDENTS_DATABASE_NAME = 'student_names.db'
 
 
 def create_app():
@@ -34,6 +32,8 @@ def create_app():
 
 def create_database(app):
     if not path.exists(MAIN_DB_NAME):
-        db.create_all(app=app)
+        with app.app_context():
+            db.create_all()
     if not path.exists(STUDENTS_DATABASE_NAME):
-        db.create_all(app=app,bind='student_names')
+        with app.app_context():
+            db.create_all(bind_key='student_names')

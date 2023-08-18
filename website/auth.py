@@ -3,6 +3,8 @@ from .models import NAMES, Student
 from . import db
 from .helpers import *
 
+import subprocess
+
 auth = Blueprint('auth',__name__)
 
 @auth.route('/stop-attend')
@@ -21,13 +23,18 @@ def start_attend():
 
 @auth.route('/login',methods=['POST','GET'])
 def login():
+    mac_addr = set()
     ip_address = request.remote_addr
+    mac_adress =  subprocess.run(f'for /f "tokens=2" %a in (\'arp -a ^| find "{ip_address}"\') do @echo %a'
+                                 , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    mac_adress = mac_adress.stdout
     departements = openfile(departement_info_file)
     if ip_address == IP:
         pass
-    elif (ip_address in students_IPs) or shared_info['close_attend'] :
+    elif (mac_adress[0:17] in students_IPs) or shared_info['close_attend'] :
         abort(403)
     if request.method == 'POST':
+        
         if request.form.get('registere') != None:
             if request.form.get('name') == None:
                 flash("Select Departement To Show the Names",category='error')
@@ -44,7 +51,7 @@ def login():
                 db.session.add(attend_student)
                 db.session.commit()
                 flash("Success", category='success')
-                students_IPs.add(ip_address)
+                students_IPs.add(str(mac_adress)[0:17])
                 return redirect(url_for('views.home'))
         elif request.form.get('select_dep') != None:
             departement = str(request.form.get('departement')).strip()
